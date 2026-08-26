@@ -1,0 +1,12 @@
+# Binary built files
+bin/
+server
+
+# IDE & OS files
+.vscode/
+.idea/
+.DS_Store
+
+# Temporary files
+*.tmp
+*.log
