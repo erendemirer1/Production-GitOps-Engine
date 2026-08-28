@@ -41,3 +41,7 @@ autoscaling:
 
 rollout:
   enabled: false
+
+# Prometheus ServiceMonitor configuration
+serviceMonitor:
+  enabled: true
