@@ -1,0 +1,40 @@
+# Default number of replicas
+replicaCount: 1
+
+# Container image settings
+image:
+  repository: ghcr.io/erendemirer1/cloud-native-devops-platform
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+# Internal Service configuration
+service:
+  type: ClusterIP
+  port: 80
+
+# External Ingress configuration (Routing)
+ingress:
+  enabled: true
+  className: traefik
+  annotations: {}
+  hosts:
+    - host: localhost
+      paths:
+        - path: /
+          pathType: Prefix
+
+# CPU and Memory resource limits (Protection against OOM)
+resources:
+  limits:
+    cpu: 200m
+    memory: 128Mi
+  requests:
+    cpu: 50m
+    memory: 64Mi
+
+# Horizontal Pod Autoscaling (Disabled by default)
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 70

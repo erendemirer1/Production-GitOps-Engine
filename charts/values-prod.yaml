@@ -1,0 +1,19 @@
+# PROD Environment Overrides
+replicaCount: 3
+
+image:
+  tag: "latest" # In GitOps, ArgoCD will inject the Git commit SHA here
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 75

@@ -1,0 +1,16 @@
+# DEV Environment Overrides
+replicaCount: 1
+
+image:
+  tag: "latest"
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 64Mi
+  requests:
+    cpu: 20m
+    memory: 32Mi
+
+autoscaling:
+  enabled: false
