@@ -6,10 +6,10 @@ metadata:
   labels:
     {{- include "devops-app.labels" . | nindent 4 }}
 spec:
-  # Target Deployment to scale
+  # Scale Rollout if enabled, otherwise fallback to Deployment
   scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
+    apiVersion: {{ ternary "argoproj.io/v1alpha1" "apps/v1" .Values.rollout.enabled }}
+    kind: {{ ternary "Rollout" "Deployment" .Values.rollout.enabled }}
     name: {{ include "devops-app.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
