@@ -1,13 +1,20 @@
-{{- if not .Values.rollout.enabled }}
-apiVersion: apps/v1
-kind: Deployment
+{{- if .Values.rollout.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: {{ include "devops-app.fullname" . }}
   labels:
     {{- include "devops-app.labels" . | nindent 4 }}
 spec:
-  # Desired number of pod replicas (defined in values.yaml)
   replicas: {{ .Values.replicaCount }}
+  # Progressive Canary Delivery Strategy
+  strategy:
+    canary:
+      steps:
+        - setWeight: 20
+        - pause: { duration: 30s }
+        - setWeight: 50
+        - pause: { duration: 30s }
   selector:
     matchLabels:
       {{- include "devops-app.selectorLabels" . | nindent 6 }}
@@ -16,7 +23,6 @@ spec:
       labels:
         {{- include "devops-app.selectorLabels" . | nindent 8 }}
     spec:
-      # Enforce non-root execution
       securityContext:
         runAsNonRoot: true
         runAsUser: 10001
@@ -28,7 +34,6 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
-          # Kubernetes Health Probes
           livenessProbe:
             httpGet:
               path: /healthz
@@ -41,7 +46,6 @@ spec:
               port: http
             initialDelaySeconds: 3
             periodSeconds: 10
-          # Resource boundaries to prevent resource starvation (OOM)
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
 {{- end }}

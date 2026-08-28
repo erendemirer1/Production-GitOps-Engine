@@ -17,3 +17,6 @@ autoscaling:
   minReplicas: 2
   maxReplicas: 10
   targetCPUUtilizationPercentage: 75
+
+rollout:
+  enabled: true
