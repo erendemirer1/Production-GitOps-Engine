@@ -1,25 +1,25 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: devops-app-dev
+  name: devops-app-prod
   namespace: argocd
 spec:
   project: default
-  # 1. Source: Where is the code located in Git?
+  # 1. Source: Points to charts directory with values-prod.yaml
   source:
     repoURL: https://github.com/erendemirer1/cloud-native-devops-platform.git
     targetRevision: HEAD
     path: charts
     helm:
       valueFiles:
-        - values-dev.yaml
+        - values-prod.yaml
 
-  # 2. Destination: Where to deploy inside Kubernetes?
+  # 2. Destination: Deploy to prod namespace
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: prod
 
-  # 3. Sync Policy: Full automated GitOps and Self-Healing
+  # 3. Automated GitOps and Self-Healing
   syncPolicy:
     automated:
       prune: true
