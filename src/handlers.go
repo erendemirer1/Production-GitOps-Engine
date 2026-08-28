@@ -11,9 +11,9 @@ import (
 
 // HealthzHandler: for kubernetes healthcheck
 func HealthzHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json") // Header'ı application/json yap
-	w.WriteHeader(http.StatusOK)                       // 200 Durum Kodu ver
-	_ = json.NewEncoder(w).Encode(map[string]string{    // { "status": "UP" } JSON'ını yaz
+	w.Header().Set("Content-Type", "application/json") // Header to application/json 
+	w.WriteHeader(http.StatusOK)                       // 200
+	_ = json.NewEncoder(w).Encode(map[string]string{    // { "status": "UP" } JSON
 		"status": "UP",
 	})
 }
@@ -36,7 +36,7 @@ func HelloHandler(w http.ResponseWriter, r *http.Request){
 	w.WriteHeader(http.StatusOK) // 200
 	_ = json.NewEncoder(w).Encode(map[string]interface{}{
 		"message":   "Hello from Cloud-Native API!",
-		"version":   "v1.0.0",
+		"version":   "v2.0.0",
 		"timestamp": time.Now().UTC().Format(time.RFC3339),
 	})
 }

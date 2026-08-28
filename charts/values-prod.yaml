@@ -2,7 +2,8 @@
 replicaCount: 3
 
 image:
-  tag: "latest" # In GitOps, ArgoCD will inject the Git commit SHA here
+  repository: devops-app
+  tag: "v2.0.0"
 
 resources:
   limits:
