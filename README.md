@@ -42,6 +42,7 @@ flowchart TD
 
 | Domain | Technology | Purpose |
 | :--- | :--- | :--- |
+| **Infrastructure as Code** | Terraform (>= 1.5) | Modular IaC for automated bootstrapping of ArgoCD, Rollouts, and Monitoring |
 | **Backend Core** | Go 1.26 | Lightweight HTTP API with graceful shutdown and atomic error toggle |
 | **Containerization** | Docker, Alpine Linux | Multi-stage, minimal (~30MB), rootless execution (UID 10001) |
 | **CI / DevSecOps** | GitHub Actions, Trivy, GHCR | Automated linting, vulnerability scanning, and container registry publishing |
@@ -60,6 +61,12 @@ flowchart TD
 ├── .github/
 │   └── workflows/
 │       └── ci.yaml              # DevSecOps CI Pipeline (Test, Trivy scan, GHCR build/push)
+├── terraform/                   # Infrastructure as Code (IaC) Bootstrapping Module
+│   ├── versions.tf              # Provider constraints (Helm, Kubernetes)
+│   ├── providers.tf             # Kubernetes & Helm provider configurations
+│   ├── variables.tf             # Parameterized variables (namespaces, context)
+│   ├── main.tf                  # Automated Helm releases for ArgoCD, Rollouts, Prometheus
+│   └── outputs.tf               # Infrastructure DNS endpoints and status outputs
 ├── charts/                      # Production Helm Chart
 │   ├── Chart.yaml               # Chart metadata
 │   ├── values.yaml              # Base default values
@@ -99,6 +106,7 @@ Ensure the following tools are installed locally:
 - Docker (`>= 24.0`)
 - `kubectl` (`>= v1.28`)
 - `helm` (`>= v3.12`)
+- `terraform` (`>= v1.5`)
 - `k3d` (`>= v5.0`)
 - `kubectl-argo-rollouts` plugin
 
