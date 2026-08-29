@@ -7,7 +7,7 @@ spec:
   project: default
   # 1. Source: Points to charts directory with values-prod.yaml
   source:
-    repoURL: https://github.com/erendemirer1/cloud-native-devops-platform.git
+    repoURL: https://github.com/erendemirer1/Production-GitOps-Engine.git
     targetRevision: HEAD
     path: charts
     helm:

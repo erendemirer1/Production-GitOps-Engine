@@ -1,6 +1,6 @@
-# Cloud-Native DevOps Platform
+# Production GitOps Engine
 
-Production-grade cloud-native microservice architecture demonstrating Trunk-Based Development, automated DevSecOps CI pipeline, declarative GitOps deployment via ArgoCD, progressive Canary rollouts via Argo Rollouts, and full-stack observability with Prometheus and Grafana.
+Production-grade cloud-native microservice architecture demonstrating Trunk-Based Development, automated DevSecOps CI pipeline, Infrastructure as Code (Terraform), declarative GitOps deployment via ArgoCD, progressive Canary rollouts via Argo Rollouts, and full-stack observability with Prometheus and Grafana.
 
 ---
 
